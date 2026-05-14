@@ -64,8 +64,9 @@ namespace SceneGenerator
                     new PanelConfig
                     {
                         name = "MainMenuPanel",
-                        anchorMin = new Vector2(0.1f, 0.1f),
-                        anchorMax = new Vector2(0.9f, 0.9f),
+                        anchorPreset = AnchorPreset.Custom,
+                        customAnchorMin = new Vector2(0.1f, 0.1f),
+                        customAnchorMax = new Vector2(0.9f, 0.9f),
                         pivot = new Vector2(0.5f, 0.5f),
                         backgroundColor = new Color(0f, 0f, 0f, 0.85f),
                         elements = new List<UIElementConfig>
@@ -74,8 +75,9 @@ namespace SceneGenerator
                             {
                                 name = "TitleText",
                                 elementType = UIElementType.Text,
-                                anchorMin = new Vector2(0.1f, 0.75f),
-                                anchorMax = new Vector2(0.9f, 0.95f),
+                                anchorPreset = AnchorPreset.Custom,
+                                customAnchorMin = new Vector2(0.1f, 0.75f),
+                                customAnchorMax = new Vector2(0.9f, 0.95f),
                                 pivot = new Vector2(0.5f, 0.5f),
                                 sizeDelta = Vector2.zero,
                                 defaultText = "Game Title",
@@ -86,8 +88,9 @@ namespace SceneGenerator
                             {
                                 name = "PlayButton",
                                 elementType = UIElementType.Button,
-                                anchorMin = new Vector2(0.3f, 0.50f),
-                                anchorMax = new Vector2(0.7f, 0.65f),
+                                anchorPreset = AnchorPreset.Custom,
+                                customAnchorMin = new Vector2(0.3f, 0.50f),
+                                customAnchorMax = new Vector2(0.7f, 0.65f),
                                 pivot = new Vector2(0.5f, 0.5f),
                                 sizeDelta = Vector2.zero,
                                 defaultText = "Play",
@@ -99,8 +102,9 @@ namespace SceneGenerator
                             {
                                 name = "SettingsButton",
                                 elementType = UIElementType.Button,
-                                anchorMin = new Vector2(0.3f, 0.33f),
-                                anchorMax = new Vector2(0.7f, 0.48f),
+                                anchorPreset = AnchorPreset.Custom,
+                                customAnchorMin = new Vector2(0.3f, 0.33f),
+                                customAnchorMax = new Vector2(0.7f, 0.48f),
                                 pivot = new Vector2(0.5f, 0.5f),
                                 sizeDelta = Vector2.zero,
                                 defaultText = "Settings",
@@ -112,8 +116,9 @@ namespace SceneGenerator
                             {
                                 name = "QuitButton",
                                 elementType = UIElementType.Button,
-                                anchorMin = new Vector2(0.3f, 0.16f),
-                                anchorMax = new Vector2(0.7f, 0.31f),
+                                anchorPreset = AnchorPreset.Custom,
+                                customAnchorMin = new Vector2(0.3f, 0.16f),
+                                customAnchorMax = new Vector2(0.7f, 0.31f),
                                 pivot = new Vector2(0.5f, 0.5f),
                                 sizeDelta = Vector2.zero,
                                 defaultText = "Quit",
@@ -145,8 +150,7 @@ namespace SceneGenerator
                     new PanelConfig
                     {
                         name = "LoadingPanel",
-                        anchorMin = Vector2.zero,
-                        anchorMax = Vector2.one,
+                        anchorPreset = AnchorPreset.StretchAll,
                         pivot = new Vector2(0.5f, 0.5f),
                         backgroundColor = Color.black,
                         elements = new List<UIElementConfig>
@@ -155,8 +159,9 @@ namespace SceneGenerator
                             {
                                 name = "LoadingText",
                                 elementType = UIElementType.Text,
-                                anchorMin = new Vector2(0.1f, 0.55f),
-                                anchorMax = new Vector2(0.9f, 0.70f),
+                                anchorPreset = AnchorPreset.Custom,
+                                customAnchorMin = new Vector2(0.1f, 0.55f),
+                                customAnchorMax = new Vector2(0.9f, 0.70f),
                                 pivot = new Vector2(0.5f, 0.5f),
                                 sizeDelta = Vector2.zero,
                                 defaultText = "Loading...",
@@ -167,8 +172,9 @@ namespace SceneGenerator
                             {
                                 name = "ProgressBarBackground",
                                 elementType = UIElementType.Image,
-                                anchorMin = new Vector2(0.1f, 0.40f),
-                                anchorMax = new Vector2(0.9f, 0.50f),
+                                anchorPreset = AnchorPreset.Custom,
+                                customAnchorMin = new Vector2(0.1f, 0.40f),
+                                customAnchorMax = new Vector2(0.9f, 0.50f),
                                 pivot = new Vector2(0.5f, 0.5f),
                                 sizeDelta = Vector2.zero,
                                 imageColor = new Color(0.2f, 0.2f, 0.2f, 1f)
@@ -177,8 +183,9 @@ namespace SceneGenerator
                             {
                                 name = "ProgressBarFill",
                                 elementType = UIElementType.Image,
-                                anchorMin = new Vector2(0.1f, 0.40f),
-                                anchorMax = new Vector2(0.1f, 0.50f),
+                                anchorPreset = AnchorPreset.Custom,
+                                customAnchorMin = new Vector2(0.1f, 0.40f),
+                                customAnchorMax = new Vector2(0.1f, 0.50f),
                                 pivot = new Vector2(0f, 0.5f),
                                 sizeDelta = Vector2.zero,
                                 imageColor = new Color(0.2f, 0.8f, 0.2f, 1f)

@@ -4,6 +4,9 @@ using UnityEditor.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
 using System.Collections.Generic;
+#if TMP_PRESENT
+using TMPro;
+#endif
 
 namespace SceneGenerator
 {
@@ -241,14 +244,28 @@ namespace SceneGenerator
 
         // ── UI helpers ──────────────────────────────────────────────────────
 
+        static void ApplyAnchors(RectTransform rect, AnchorPreset preset, Vector2 customMin, Vector2 customMax)
+        {
+            if (preset == AnchorPreset.Custom)
+            {
+                rect.anchorMin = customMin;
+                rect.anchorMax = customMax;
+            }
+            else
+            {
+                var (min, max) = AnchorPresetResolver.Resolve(preset);
+                rect.anchorMin = min;
+                rect.anchorMax = max;
+            }
+        }
+
         static void CreatePanel(PanelConfig cfg, Transform canvasTransform)
         {
             var go = new GameObject(cfg.name);
             go.transform.SetParent(canvasTransform, false);
 
             var rect = go.AddComponent<RectTransform>();
-            rect.anchorMin        = cfg.anchorMin;
-            rect.anchorMax        = cfg.anchorMax;
+            ApplyAnchors(rect, cfg.anchorPreset, cfg.customAnchorMin, cfg.customAnchorMax);
             rect.pivot            = cfg.pivot;
             rect.anchoredPosition = cfg.anchoredPosition;
             rect.sizeDelta        = cfg.sizeDelta;
@@ -266,8 +283,7 @@ namespace SceneGenerator
             go.transform.SetParent(parent, false);
 
             var rect = go.AddComponent<RectTransform>();
-            rect.anchorMin        = cfg.anchorMin;
-            rect.anchorMax        = cfg.anchorMax;
+            ApplyAnchors(rect, cfg.anchorPreset, cfg.customAnchorMin, cfg.customAnchorMax);
             rect.pivot            = cfg.pivot;
             rect.anchoredPosition = cfg.anchoredPosition;
             rect.sizeDelta        = cfg.sizeDelta;
@@ -283,7 +299,7 @@ namespace SceneGenerator
                     break;
 
                 case UIElementType.Text:
-                    AddLegacyText(go, cfg);
+                    AddText(go, cfg);
                     break;
 
                 case UIElementType.Button:
@@ -316,14 +332,25 @@ namespace SceneGenerator
             }
         }
 
-        static void AddLegacyText(GameObject go, UIElementConfig cfg)
+        static void AddText(GameObject go, UIElementConfig cfg)
         {
-            var t = go.AddComponent<Text>();
-            t.text      = cfg.defaultText;
-            t.fontSize  = cfg.fontSize;
-            t.color     = cfg.textColor;
-            t.alignment = TextAnchor.MiddleCenter;
-            t.font      = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+#if TMP_PRESENT
+            if (cfg.useTextMeshPro)
+            {
+                var t = go.AddComponent<TextMeshProUGUI>();
+                t.text      = cfg.defaultText;
+                t.fontSize  = cfg.fontSize;
+                t.color     = cfg.textColor;
+                t.alignment = TextAlignmentOptions.Center;
+                return;
+            }
+#endif
+            var legacy = go.AddComponent<Text>();
+            legacy.text      = cfg.defaultText;
+            legacy.fontSize  = cfg.fontSize;
+            legacy.color     = cfg.textColor;
+            legacy.alignment = TextAnchor.MiddleCenter;
+            legacy.font      = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
         }
 
         static void AddTextChild(GameObject parent, UIElementConfig cfg)
@@ -336,7 +363,7 @@ namespace SceneGenerator
             r.anchorMax = Vector2.one;
             r.sizeDelta = Vector2.zero;
 
-            AddLegacyText(child, cfg);
+            AddText(child, cfg);
         }
     }
 }

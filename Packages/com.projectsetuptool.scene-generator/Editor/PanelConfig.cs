@@ -9,8 +9,9 @@ namespace SceneGenerator
         public string name = "Panel";
 
         [Header("Layout")]
-        public Vector2 anchorMin = Vector2.zero;
-        public Vector2 anchorMax = Vector2.one;
+        public AnchorPreset anchorPreset = AnchorPreset.StretchAll;
+        public Vector2 customAnchorMin = Vector2.zero;
+        public Vector2 customAnchorMax = Vector2.one;
         public Vector2 pivot = new Vector2(0.5f, 0.5f);
         public Vector2 anchoredPosition = Vector2.zero;
         public Vector2 sizeDelta = Vector2.zero;
